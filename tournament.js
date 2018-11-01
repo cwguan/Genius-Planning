@@ -5,8 +5,9 @@ var indexTop;
 var indexBottom;
 var imagePath;
 var imageNames;
-
+var winnerShown;
 $(document).ready(function() {
+	winnerShown = false;
 	topCardList = ["Olive Garden", "Vallartas", "Olive Garden"];
 	bottomCardList = ["Chipotle","In-N-Out","Vallartas"]
 	address = []
@@ -45,9 +46,11 @@ function toggleClass(event) {
 	//alert("in method");
 	indexTop++;
 	indexBottom++;
-	if(indexTop >= 3){
+	if(indexTop >= 3 || !winnerShown){
 		//alert("in winner");
+		winnerShown = true;
 		showWinner();
+
 	}
 
 	$('#topCard').find('.cardTitle').text(topCardList[indexBottom]);
