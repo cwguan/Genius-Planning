@@ -1,0 +1,83 @@
+* {
+    box-sizing: border-box;
+}
+
+.search-container {
+    height: 40px;
+    border-radius: 3px;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: flex-start;
+    margin-bottom: 20px;
+    vertical-align: center;
+    background-color: #FBFBFB;
+}
+
+.search-container input[type="text"] {
+    padding: 6px;
+    width: 600px;
+    font-size: 17px;
+    border-radius: 5px;
+}
+
+.search-container .search-bar-icon {
+    background-color: #FBFBFB;
+    border: none;
+    padding: 6px 10px;
+    font-size: 17px;
+    cursor: pointer;
+    position: relative;
+    top: 8px;
+}
+
+button.search-bar-icon:active {
+    background-color: #EAEAEA;
+}
+
+.chip-container {
+    padding: 10px;
+    margin: 10px;
+    height: 325px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: space-around;
+}
+
+.chip-container .restaurant-chip {
+    width: 300px;
+    height: 80px;
+    border-radius: 80px;
+    margin: 10px;
+    background-color: #EAEAEA;
+    flex-shrink: 2;
+}
+
+
+.restaurant-chip .mdl-chip__action {
+    float: right;
+    margin-top: 28px;
+    margin-right: 10px;
+}
+
+
+.restaurant-chip .mdl-chip__contact {
+    height: 80px;
+    width: 80px;
+    border-radius: 100%;
+}
+
+.restaurant-chip .mdl-chip__text {
+    font-size: 20px;
+}
+
+#finish-button {
+    width: 135px;
+    height: 50px;
+    font-size: 17px;
+    margin: 20px auto;
+}

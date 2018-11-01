@@ -1,0 +1,27 @@
+.genius-header-row {
+    padding: 0px 40px;
+}
+
+.description-card.mdl-card {
+    width: 95%;
+    padding: 20px 10px;
+    margin: 10px 10px;
+    background-color: #FBFBFB;
+}
+
+.mdl-card__title-text.description-title {
+    font-size: 36px;
+}
+
+.mdl-card__supporting-text.description-text {
+    font-size: 20px;
+    color: #696969;
+}
+
+.centered-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: flex-start;
+}

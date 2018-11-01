@@ -1,0 +1,65 @@
+<html lang="en">
+    <head>
+        <title>Genius Planning - Enter Your Restaurants</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-cyan.min.css" />
+        <link rel="stylesheet" href="style/restaurantinput.css" />
+        <link rel="stylesheet" href="style/style.css" />
+    </head>
+    <body>
+        <!-- Layout for a fixed header that rest of document needs to be inside -->
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <header class="mdl-layout__header">
+                <div class="mdl-layout__header-row genius-header-row">
+                    <span class="mdl-layout-title">Genius Planning</span>
+                </div>
+            </header>
+            <main>
+                <div class="centered-container">
+                    <div class="description-card mdl-card mdl-shadow--2dp">
+                        <div class="mdl-card__title">
+                            <h2 class="mdl-card__title-text  description-title">Enter Your Restaurants</h2>
+                        </div>
+                        <div class="mdl-card__supporting-text description-text">
+                            Start typing your chosen restaurants & select to enter them into the tournament!
+                        </div>
+                    </div>
+                    <div class="search-container mdl-shadow--2dp">
+                        <form>
+                            <button type="submit" class="search-bar-icon"><i class="material-icons">search</i></button>
+                            <input type="text" placeholder="Search for restaurants..." name="search" autocomplete="off">
+                            <button type="submit" class="search-bar-icon"><i class="material-icons">close</i></button>
+                        </form>
+                    </div>
+                </div>
+                <div class="chip-container">
+                    <span class="mdl-chip mdl-chip--contact mdl-chip--deletable restaurant-chip">
+                        <img class="mdl-chip__contact" src="img/sample/olive-garden.jpg"></img>
+                        <span class="mdl-chip__text">Olive Garden</span>
+                        <a href="#" class="mdl-chip__action"><i class="material-icons">close</i></a>
+                    </span>
+                    <span class="mdl-chip mdl-chip--contact mdl-chip--deletable restaurant-chip">
+                        <img class="mdl-chip__contact" src="img/sample/in-n-out.png"></img>
+                        <span class="mdl-chip__text">In-n-Out Burger</span>
+                        <a href="#" class="mdl-chip__action"><i class="material-icons">close</i></a>
+                    </span>
+                    <span class="mdl-chip mdl-chip--contact mdl-chip--deletable restaurant-chip">
+                        <img class="mdl-chip__contact" src="img/sample/chipotle.jpg"></img>
+                        <span class="mdl-chip__text">Chipotle</span>
+                        <a href="#" class="mdl-chip__action"><i class="material-icons">close</i></a>
+                    </span>
+                </div>
+            </main>
+            <footer>
+                <div class="centered-container">
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="finish-button">
+                        FINISH
+                    </button>
+                </div>
+            </footer>
+        </div>
+
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    </body>
+</html>
