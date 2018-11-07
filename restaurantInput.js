@@ -108,7 +108,7 @@ function autocomplete(inp, db) {
           b.innerHTML = "<strong>" + db[i].name.substr(0, val.length) + "</strong>";
           b.innerHTML += db[i].name.substr(val.length);
           /*insert a input field that will hold the current array item's value:*/
-          b.innerHTML += "<input type='hidden' value='" + db[i].name + "'>";
+          b.innerHTML += "<input type='hidden' value=\"" + db[i].name + "\">";
           b.innerHTML += "<p id='restaurant-address' style='float: right; color: gray;'>" + db[i].address + "</p>";
           /*execute a function when someone clicks on the item value (DIV element):*/
           b.addEventListener("click", function(e) {
