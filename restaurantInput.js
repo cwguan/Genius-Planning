@@ -26,16 +26,17 @@ function updateChipContainer() {
   var template = Handlebars.compile(source);
 
   var parentDiv = $("#chipContainer");
-  console.log(selectedRestaurants);
 
   for (var i = 0; i < restaurantsToDisplay.length; i++) {
-    selectedRestaurants.push(restaurantsToDisplay[i]);
-    var curRestaurant = restaurantsToDisplay[i];
-    var curHtml = template(curRestaurant);
-    console.log(curHtml);
-    parentDiv.append(curHtml);
+    // Prevent duplicates from being added to selectedRestaurants and chip being created
+    if(!selectedRestaurants.includes(restaurantsToDisplay[i])) {
+        selectedRestaurants.push(restaurantsToDisplay[i]);
+        var curRestaurant = restaurantsToDisplay[i];
+        var curHtml = template(curRestaurant);
+        parentDiv.append(curHtml);
+    }
   }
-
+  console.log("Updated selectedRestaurants in updateChipContainer: ", selectedRestaurants);
   restaurantsToDisplay = [];
 }
 
@@ -60,21 +61,23 @@ function findRestaurantInDB(restaurantName, addressValue) {
 }
 
 
-function deleteChip(restaurantName) {
-  console.log(restaurantName);
+function deleteChip(chipId) {
+  //Removing restaurant from selectedRestaurants
   for (var i = 0; i < selectedRestaurants.length; i++) {
-    if (selectedRestaurants[i].name === restaurantName) {
+    var currSelectedRestaurantId = selectedRestaurants[i].name + "===" + selectedRestaurants[i].address;
+    if (currSelectedRestaurantId === chipId) {
       selectedRestaurants.splice(i, 1);
     }
-    console.log('IN DELETECHIP()');
-    console.log($("#chipContainer"));
-    var chipContainer = $("#chipContainer");
-    $("#" + JSON.stringify(restaurantName)).remove();
-
-    for (var i = 0; i < chipContainer.length; i++) {
-
-    }
   }
+  console.log("Updated selectedRestaurants in deleteChip: ", selectedRestaurants);
+  //Removing restaurant chip from chipContainer
+  var chipContainer = $("#chipContainer");
+  chipContainer.children('span').each(function(i) {
+      if( this.id === chipId ) {
+          this.remove();
+          return false;
+      }
+  });
 }
 
 

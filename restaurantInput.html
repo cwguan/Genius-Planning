@@ -58,10 +58,10 @@
 
         <!-- Handlebars template for restaurant chips -->
         <script id="chip-template" type="text/x-handlebars-template">
-          <span class="mdl-chip mdl-chip--contact mdl-chip--deletable restaurant-chip" id="{{name}}">
+          <span class="mdl-chip mdl-chip--contact mdl-chip--deletable restaurant-chip" id="{{name}}==={{address}}">
               <img class="mdl-chip__contact" src="{{image_url}}"></img>
               <span class="mdl-chip__text">{{#modifyname name}}{{name}}{{/modifyname}}</span>
-              <a href="#" onclick="deleteChip({{name}})" class="mdl-chip__action"><i class="material-icons">close</i></a>
+              <a href="#" onclick="deleteChip(this.parentElement.id)" class="mdl-chip__action"><i class="material-icons">close</i></a>
           </span>
         </script>
     </body>
