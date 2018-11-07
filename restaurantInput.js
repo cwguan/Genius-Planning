@@ -5,6 +5,16 @@ var selectedRestaurants = [];
 var restaurantsToDisplay = [];
 
 $(document).ready(function() {
+  Handlebars.registerHelper('modifyname', function(a, opts) {
+      if(a.length > 10) {
+          var modifiedName = a.slice(0, 10);
+          modifiedName += "...";
+          return modifiedName;
+      }
+      else {
+          return opts.fn(this);
+      }
+  });
   updateChipContainer();
 });
 
@@ -114,6 +124,7 @@ function autocomplete(inp, db) {
             /*close the list of autocompleted values,
             (or any other open lists of autocompleted values:*/
             closeAllLists();
+            //Clear the input text field after they select a restaurant
             inp.value = "";
           });
           a.appendChild(b);
