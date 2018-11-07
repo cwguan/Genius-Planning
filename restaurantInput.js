@@ -32,9 +32,9 @@ function updateChipContainer() {
 // Finds the corresponding restaurant object with all relevant info in the
 // database based on the name
 function findRestaurantInDB(restaurantName) {
-  for (var i = 0; i < database.length; i++) {
-    if (database[i].name === restaurantName) {
-      return database[i];
+  for (var i = 0; i < restaurantData.length; i++) {
+    if (restaurantData[i].name === restaurantName) {
+      return restaurantData[i];
     }
   }
 
@@ -95,7 +95,7 @@ function autocomplete(inp, db) {
           b.innerHTML += db[i].name.substr(val.length);
           /*insert a input field that will hold the current array item's value:*/
           b.innerHTML += "<input type='hidden' value='" + db[i].name + "'>";
-
+          b.innerHTML += "<p style='float: right; color: gray;'>" + db[i].address + "</p>"; 
           /*execute a function when someone clicks on the item value (DIV element):*/
           b.addEventListener("click", function(e) {
             /*insert the value for the autocomplete text field:*/
@@ -173,4 +173,4 @@ function autocomplete(inp, db) {
 
 }
 
-autocomplete(document.getElementById("restaurantInput"), database);
+autocomplete(document.getElementById("restaurantInput"), restaurantData);
