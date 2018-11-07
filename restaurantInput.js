@@ -31,9 +31,10 @@ function updateChipContainer() {
 
 // Finds the corresponding restaurant object with all relevant info in the
 // database based on the name
-function findRestaurantInDB(restaurantName) {
+function findRestaurantInDB(restaurantName, addressValue) {
   for (var i = 0; i < restaurantData.length; i++) {
-    if (restaurantData[i].name === restaurantName) {
+    if (restaurantData[i].name === restaurantName && restaurantData[i].address === addressValue) {
+      console.log(`Found restaurant: ${restaurantName} === ${addressValue}`);
       return restaurantData[i];
     }
   }
@@ -95,12 +96,19 @@ function autocomplete(inp, db) {
           b.innerHTML += db[i].name.substr(val.length);
           /*insert a input field that will hold the current array item's value:*/
           b.innerHTML += "<input type='hidden' value='" + db[i].name + "'>";
-          b.innerHTML += "<p style='float: right; color: gray;'>" + db[i].address + "</p>"; 
+          b.innerHTML += "<p id='restaurant-address' style='float: right; color: gray;'>" + db[i].address + "</p>";
           /*execute a function when someone clicks on the item value (DIV element):*/
           b.addEventListener("click", function(e) {
             /*insert the value for the autocomplete text field:*/
             inp.value = this.getElementsByTagName("input")[0].value;
-            restaurantsToDisplay.push(findRestaurantInDB(inp.value));
+            var addressValue = this.getElementsByTagName("p")[0].innerHTML;
+/*
+            var id = this.getElementsByTagName("p")[0].parentElement.innerHTML;
+            //var addressValue = $('#')
+            console.log(addressValue);
+            console.log(id);
+*/
+            restaurantsToDisplay.push(findRestaurantInDB(inp.value, addressValue));
             updateChipContainer();
             /*close the list of autocompleted values,
             (or any other open lists of autocompleted values:*/

@@ -400,8 +400,9 @@ const restaurantData = [
     {"name":"Carl's Jr.","address":"3833 Convoy St San Diego 92111","phone":"+18585654032","price":"$","rating":2.5,"image_url":"https://s3-media2.fl.yelpcdn.com/bphoto/A5Z-T7qotBVbD7lLUyW8TQ/o.jpg"},
     {"name":"Brig HQ","address":"7889 Ostrow St San Diego 92111","phone":"+18582681030","price":"$$","rating":4.5,"image_url":"https://s3-media2.fl.yelpcdn.com/bphoto/oz3M0ACr2D450shnFXWPGQ/o.jpg"}
 ];
-
+/*
 //Sample of iterating through restaurantData array and printing name field
 restaurantData.forEach( business => {
     console.log(business.name);
 });
+*/
