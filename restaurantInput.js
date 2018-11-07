@@ -85,6 +85,15 @@ function deleteChip(chipId) {
   });
 }
 
+
+/* Put selectedRestaurants into session storage for access in tournament
+  Navigation to the next page is handled in html code
+  */
+function finish() {
+  sessionStorage.setItem('selectedRestaurants', JSON.stringify(selectedRestaurants));
+}
+
+
 /* Takes in two arguments, the text field element and our database of resturants (possible values)*/
 function autocomplete(inp, db) {
   var currentFocus;
