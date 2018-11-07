@@ -100,7 +100,8 @@ function autocomplete(inp, db) {
           /*execute a function when someone clicks on the item value (DIV element):*/
           b.addEventListener("click", function(e) {
             /*insert the value for the autocomplete text field:*/
-            inp.value = this.getElementsByTagName("input")[0].value;
+            //inp.value = this.getElementsByTagName("input")[0].value;
+            var restaurantName = this.getElementsByTagName("input")[0].value;
             var addressValue = this.getElementsByTagName("p")[0].innerHTML;
 /*
             var id = this.getElementsByTagName("p")[0].parentElement.innerHTML;
@@ -108,11 +109,12 @@ function autocomplete(inp, db) {
             console.log(addressValue);
             console.log(id);
 */
-            restaurantsToDisplay.push(findRestaurantInDB(inp.value, addressValue));
+            restaurantsToDisplay.push(findRestaurantInDB(restaurantName, addressValue));
             updateChipContainer();
             /*close the list of autocompleted values,
             (or any other open lists of autocompleted values:*/
             closeAllLists();
+            inp.value = "";
           });
           a.appendChild(b);
         }
