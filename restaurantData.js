@@ -1,3 +1,14 @@
+/* restaurantData includes 200 restaurants from around 9500 Gilman Dr and 200 from around Convoy street.
+ * Each restaurant is saved in the following schema
+    {
+        "name": "restaurant name",
+        "address": "123 StreetName City ZipCode",
+        "phone": "1234567890",
+        "rating": 5,
+        "image_url": "www.asdfasdfasdf.jpg"
+    }
+*/
+
 const restaurantData = [
     {"name":"By The Beach Caribbean Cuisine","address":"9500 Gilman Dr San Diego 92093","phone":"+19513820224","rating":4,"image_url":"https://s3-media3.fl.yelpcdn.com/bphoto/KDuMkvQ43BD07mdvLd5ybQ/o.jpg"},
     {"name":"Seed + Sprout","address":"9500 Gilman Dr San Diego 92093","phone":"","price":"$","rating":3,"image_url":"https://s3-media3.fl.yelpcdn.com/bphoto/JvIDTowa4TjcoyUD4L7pLQ/o.jpg"},
