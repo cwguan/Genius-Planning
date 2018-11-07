@@ -44,7 +44,6 @@ $("#topButton").click(topButtonClick);
 $("#bottomButton").click(bottomButtonClick);
 
 function topButtonClick(event){
-	alert(restaurantList);
 	restaurantList.push(restaurantList.shift()); //add the first element in html
 	restaurantList.shift();
 
@@ -94,36 +93,6 @@ function setCardValue(topRestaurantName,bottomRestaurantName,topRestaurantAddres
 	$('#topCard').find('.mdl-card__title').css("background","url('"+topRestaurantImagePath+"') center");
 	$('#bottomCard').find('.mdl-card__title').css("background","url('"+bottomRestaurantImagePath+"') center");
 }
-/*
-function toggleClass(event) {
-	//alert("in method");
-	if(indexTop >= 2 && !winnerShown){
-		//alert("in winner");
-		winnerShown = true;
-		showWinner();
-		//$("#topButton").prop("disabled",true);
-		$("#topButton").attr('disabled','disabled');
-		$("#topButton").children().attr("disabled","disabled");
-		$("#topButton").off("click");
-		return;
-	}
-	else{
-		indexTop++;
-		indexBottom++;
-
-		$('#topCard').find('.cardTitle').text(topCardList[indexBottom]);
-		$('#bottomCard').find('.cardTitle').text(bottomCardList[indexTop]);
-
-		$('#topAddress').text(address[topCardList[indexTop]]);
-		$('#bottomAddress').text(address[bottomCardList[indexBottom]]);
-
-		//alert(bottomCardList[indexBottom]);
-		$('#topCard').find('.mdl-card__title').css("background","url('"+imagePath+imageNames[topCardList[indexTop]]+"') center");
-		$('#bottomCard').find('.mdl-card__title').css("background","url('"+imagePath+imageNames[bottomCardList[indexBottom]]+"') center");
-	}
-	
-}
-*/
 
 function showWinner(winnerName) {
 	//alert("in show winner");
