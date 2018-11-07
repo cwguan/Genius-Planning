@@ -5,7 +5,7 @@ const restaurantData = [
     {"name":"Bombay Coast Indian Tandoor & Curry Express","address":"9500 Gilman Dr La Jolla 92093","phone":"+18586229070","price":"$","rating":2.5,"image_url":"https://s3-media1.fl.yelpcdn.com/bphoto/RgQaP6qj9aGx6ADrvcaUzA/o.jpg"},
     {"name":"Santorini Island Grill","address":"9500 Gilman Dr La Jolla 92093","phone":"+18586220067","price":"$","rating":3.5,"image_url":"https://s3-media1.fl.yelpcdn.com/bphoto/3KBBZKTZY2jB6ZZYl2_S3w/o.jpg"},
     {"name":"Zanzibar Cafe","address":"9500 Gilman Dr La Jolla 92093","phone":"+18586780922","price":"$$","rating":3.5,"image_url":"https://s3-media2.fl.yelpcdn.com/bphoto/--5Ix7n-OD90yKmQsPYQBg/o.jpg"},
-    {"name":"Rubio's","address":"9500 Gilman Dr La Jolla 92093","phone":"+18587840508","price":"$","rating":3,"image_url":"https://s3-media4.fl.yelpcdn.com/bphoto/Gu1C_7Ub1mF-PRo2Bqh6mA/o.jpg"},
+    {"name":"Rubio\'s","address":"9500 Gilman Dr La Jolla 92093","phone":"+18587840508","price":"$","rating":3,"image_url":"https://s3-media4.fl.yelpcdn.com/bphoto/Gu1C_7Ub1mF-PRo2Bqh6mA/o.jpg"},
     {"name":"Round Table Pizza","address":"Ucsd Price Ctr La Jolla 92093","phone":"+18584572060","price":"$","rating":2.5,"image_url":"https://s3-media2.fl.yelpcdn.com/bphoto/YKKfNRkgNhC074BDgI0tjg/o.jpg"},
     {"name":"Lemongrass Plates","address":"9700 Gilman Dr San Diego 92093","phone":"+18584556465","price":"$","rating":3,"image_url":"https://s3-media3.fl.yelpcdn.com/bphoto/iQG99--5dZrV8VcO2Gamjw/o.jpg"},
     {"name":"Shogun","address":"9500 Gilman Dr La Jolla 92092","phone":"+18584530220","price":"$","rating":2.5,"image_url":"https://s3-media2.fl.yelpcdn.com/bphoto/zagkiM_ZbRSWf6EnlwLfWQ/o.jpg"},
@@ -400,8 +400,9 @@ const restaurantData = [
     {"name":"Carl's Jr.","address":"3833 Convoy St San Diego 92111","phone":"+18585654032","price":"$","rating":2.5,"image_url":"https://s3-media2.fl.yelpcdn.com/bphoto/A5Z-T7qotBVbD7lLUyW8TQ/o.jpg"},
     {"name":"Brig HQ","address":"7889 Ostrow St San Diego 92111","phone":"+18582681030","price":"$$","rating":4.5,"image_url":"https://s3-media2.fl.yelpcdn.com/bphoto/oz3M0ACr2D450shnFXWPGQ/o.jpg"}
 ];
-
+/*
 //Sample of iterating through restaurantData array and printing name field
 restaurantData.forEach( business => {
     console.log(business.name);
 });
+*/

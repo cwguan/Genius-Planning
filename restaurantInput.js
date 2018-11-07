@@ -5,6 +5,16 @@ var selectedRestaurants = [];
 var restaurantsToDisplay = [];
 
 $(document).ready(function() {
+  Handlebars.registerHelper('modifyname', function(a, opts) {
+      if(a.length > 10) {
+          var modifiedName = a.slice(0, 10);
+          modifiedName += "...";
+          return modifiedName;
+      }
+      else {
+          return opts.fn(this);
+      }
+  });
   updateChipContainer();
 });
 
@@ -16,24 +26,26 @@ function updateChipContainer() {
   var template = Handlebars.compile(source);
 
   var parentDiv = $("#chipContainer");
-  console.log(selectedRestaurants);
 
   for (var i = 0; i < restaurantsToDisplay.length; i++) {
-    selectedRestaurants.push(restaurantsToDisplay[i]);
-    var curRestaurant = restaurantsToDisplay[i];
-    var curHtml = template(curRestaurant);
-    console.log(curHtml);
-    parentDiv.append(curHtml);
+    // Prevent duplicates from being added to selectedRestaurants and chip being created
+    if(!selectedRestaurants.includes(restaurantsToDisplay[i])) {
+        selectedRestaurants.push(restaurantsToDisplay[i]);
+        var curRestaurant = restaurantsToDisplay[i];
+        var curHtml = template(curRestaurant);
+        parentDiv.append(curHtml);
+    }
   }
-
+  console.log("Updated selectedRestaurants in updateChipContainer: ", selectedRestaurants);
   restaurantsToDisplay = [];
 }
 
 // Finds the corresponding restaurant object with all relevant info in the
 // database based on the name
-function findRestaurantInDB(restaurantName) {
+function findRestaurantInDB(restaurantName, addressValue) {
   for (var i = 0; i < restaurantData.length; i++) {
-    if (restaurantData[i].name === restaurantName) {
+    if (restaurantData[i].name === restaurantName && restaurantData[i].address === addressValue) {
+      console.log(`Found restaurant: ${restaurantName} === ${addressValue}`);
       return restaurantData[i];
     }
   }
@@ -49,21 +61,23 @@ function findRestaurantInDB(restaurantName) {
 }
 
 
-function deleteChip(restaurantName) {
-  console.log(restaurantName);
+function deleteChip(chipId) {
+  //Removing restaurant from selectedRestaurants
   for (var i = 0; i < selectedRestaurants.length; i++) {
-    if (selectedRestaurants[i].name === restaurantName) {
+    var currSelectedRestaurantId = selectedRestaurants[i].name + "===" + selectedRestaurants[i].address;
+    if (currSelectedRestaurantId === chipId) {
       selectedRestaurants.splice(i, 1);
     }
-    console.log('IN DELETECHIP()');
-    console.log($("#chipContainer"));
-    var chipContainer = $("#chipContainer");
-    $("#" + JSON.stringify(restaurantName)).remove();
-
-    for (var i = 0; i < chipContainer.length; i++) {
-
-    }
   }
+  console.log("Updated selectedRestaurants in deleteChip: ", selectedRestaurants);
+  //Removing restaurant chip from chipContainer
+  var chipContainer = $("#chipContainer");
+  chipContainer.children('span').each(function(i) {
+      if( this.id === chipId ) {
+          this.remove();
+          return false;
+      }
+  });
 }
 
 
@@ -95,16 +109,26 @@ function autocomplete(inp, db) {
           b.innerHTML += db[i].name.substr(val.length);
           /*insert a input field that will hold the current array item's value:*/
           b.innerHTML += "<input type='hidden' value='" + db[i].name + "'>";
-          b.innerHTML += "<p style='float: right; color: gray;'>" + db[i].address + "</p>"; 
+          b.innerHTML += "<p id='restaurant-address' style='float: right; color: gray;'>" + db[i].address + "</p>";
           /*execute a function when someone clicks on the item value (DIV element):*/
           b.addEventListener("click", function(e) {
             /*insert the value for the autocomplete text field:*/
-            inp.value = this.getElementsByTagName("input")[0].value;
-            restaurantsToDisplay.push(findRestaurantInDB(inp.value));
+            //inp.value = this.getElementsByTagName("input")[0].value;
+            var restaurantName = this.getElementsByTagName("input")[0].value;
+            var addressValue = this.getElementsByTagName("p")[0].innerHTML;
+/*
+            var id = this.getElementsByTagName("p")[0].parentElement.innerHTML;
+            //var addressValue = $('#')
+            console.log(addressValue);
+            console.log(id);
+*/
+            restaurantsToDisplay.push(findRestaurantInDB(restaurantName, addressValue));
             updateChipContainer();
             /*close the list of autocompleted values,
             (or any other open lists of autocompleted values:*/
             closeAllLists();
+            //Clear the input text field after they select a restaurant
+            inp.value = "";
           });
           a.appendChild(b);
         }
