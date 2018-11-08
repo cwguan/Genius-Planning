@@ -1,79 +1,83 @@
-var topCardList;
-var bottomCardList;
-var address;
-var indexTop;
-var indexBottom;
-var imagePath;
-var imageNames;
 var winnerShown;
+var totalList;
+
 $(document).ready(function() {
+
+	totalList =  JSON.parse(sessionStorage.getItem("selectedRestaurants"));
 	winnerShown = false;
-	topCardList = ["Olive Garden", "Vallartas", "Vallartas"];
-	bottomCardList = ["Chipotle","In-N-Out","Olive Garden"]
-	address = []
-	address["Chipotle"]="Costa Verde Center,San Diego, CA 92109"
-	address["In-N-Out"]="2910 Damon Ave, San Diego, CA 92109"
-	address["Vallartas"]="4277 Genesee Ave, San Diego, CA 92117"
-	address["Olive Garden"]="3215 Sports Arena Blvd, San Diego, CA 92110"
 
-	imageNames = []
-	imageNames["Chipotle"]="chipotle.jpg"
-	imageNames["In-N-Out"]="in-n-out.png"
-	imageNames["Vallartas"]="vallartas.png"
-	imageNames["Olive Garden"]="olive-garden.jpg"
+	$('#topCard').find('.cardTitle').text(totalList[0].name);
+	$('#bottomCard').find('.cardTitle').text(totalList[1].name);
 
-	imagePath = "./img/sample/"
-	indexTop = 0;
-	indexBottom = 0;
+	$('#topAddress').text(totalList[0].address);
+	$('#bottomAddress').text(totalList[1].address);
 
-	$('#topCard').find('.cardTitle').text(topCardList[indexBottom]);
-	$('#bottomCard').find('.cardTitle').text(bottomCardList[indexTop]);
+	$('#topCard').find('.mdl-card__title').css("background","url('"+totalList[0].image_url+"') center");
+	$('#bottomCard').find('.mdl-card__title').css("background","url('"+totalList[1].image_url+"') center");
 
-	$('#topAddress').text(address[topCardList[indexTop]]);
-	$('#bottomAddress').text(address[bottomCardList[indexBottom]]);
-
-	$('#topCard').find('.mdl-card__title').css("background","url('"+imagePath+imageNames[topCardList[indexTop]]+"') center");
-	$('#bottomCard').find('.mdl-card__title').css("background","url('"+imagePath+imageNames[bottomCardList[indexBottom]]+"') center");
 	//$('#topCard.mdl-card__title').css("background-size",50+"px " + 70 + "%");
 	//$('#topCard.mdl-card__title').css("background-repeat","no-repeat");
 })
 
-$("#topButton").click(toggleClass);
-$("#bottomButton").click(toggleClass);
+$("#topButton").click(topButtonClick);
+$("#bottomButton").click(bottomButtonClick);
 
+function topButtonClick(event){
+	totalList.push(totalList.shift()); //add the first element in html
+	totalList.shift();
 
-function toggleClass(event) {
-	//alert("in method");
-	if(indexTop >= 2 && !winnerShown){
-		//alert("in winner");
+	if(totalList.length <= 1){
 		winnerShown = true;
-		showWinner();
+		showWinner(totalList[0]);
 		//$("#topButton").prop("disabled",true);
 		$("#topButton").attr('disabled','disabled');
 		$("#topButton").children().attr("disabled","disabled");
 		$("#topButton").off("click");
 		return;
 	}
-	else{
-		indexTop++;
-		indexBottom++;
 
-		$('#topCard').find('.cardTitle').text(topCardList[indexBottom]);
-		$('#bottomCard').find('.cardTitle').text(bottomCardList[indexTop]);
+	let top = totalList[0]
+	let bottom = totalList[1]
 
-		$('#topAddress').text(address[topCardList[indexTop]]);
-		$('#bottomAddress').text(address[bottomCardList[indexBottom]]);
+	setCardValue(top.name,bottom.name,top.address,bottom.address,top.image_url,bottom.image_url);
+}
+function bottomButtonClick(event) {
 
-		//alert(bottomCardList[indexBottom]);
-		$('#topCard').find('.mdl-card__title').css("background","url('"+imagePath+imageNames[topCardList[indexTop]]+"') center");
-		$('#bottomCard').find('.mdl-card__title').css("background","url('"+imagePath+imageNames[bottomCardList[indexBottom]]+"') center");
+	totalList.shift();
+	totalList.push(totalList.shift()); //add the first element in html
+
+	if(totalList.length <= 1){
+		winnerShown = true;
+		showWinner(totalList[0]);
+		//$("#topButton").prop("disabled",true);
+		$("#topButton").attr('disabled','disabled');
+		$("#topButton").children().attr("disabled","disabled");
+		$("#topButton").off("click");
+		return;
 	}
-	
+
+	let top = totalList[0]
+	let bottom = totalList[1]
+	setCardValue(top.name,bottom.name,top.address,bottom.address,top.image_url,bottom.image_url);
 }
 
-function showWinner() {
+function setCardValue(topRestaurantName,bottomRestaurantName,topRestaurantAddress,bottomRestaurantAddress,topRestaurantImagePath,bottomRestaurantImagePath){
+	$('#topCard').find('.cardTitle').text(topRestaurantName);
+	$('#bottomCard').find('.cardTitle').text(bottomRestaurantName);
+
+	$('#topAddress').text(topRestaurantAddress);
+	$('#bottomAddress').text(bottomRestaurantAddress);
+
+	//alert(bottomCardList[indexBottom]);
+	$('#topCard').find('.mdl-card__title').css("background","url('"+topRestaurantImagePath+"') center");
+	$('#bottomCard').find('.mdl-card__title').css("background","url('"+bottomRestaurantImagePath+"') center");
+}
+
+function showWinner(winner) {
 	//alert("in show winner");
 	$('.page-content').prepend("<h2>Winner</h2>");
-	$('#topCard').find('.mdl-card__title').css("background","url('"+imagePath+imageNames[topCardList[indexTop]]+"') center");
+	$('#topCard').find('.cardTitle').text(winner.name);
+	$('#topAddress').text(winner.address);
+	$('#topCard').find('.mdl-card__title').css("background","url('"+winner.image_url+"') center");
 	$('#bottomHalf').html('<div></div>');
 }
