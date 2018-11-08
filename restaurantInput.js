@@ -90,7 +90,12 @@ function deleteChip(chipId) {
   Navigation to the next page is handled in html code
   */
 function finish() {
-  sessionStorage.setItem('selectedRestaurants', JSON.stringify(selectedRestaurants));
+  if (selectedRestaurants.length < 2 ) {
+    alert('Please add at least 2 restuarants!');
+  } else {
+    sessionStorage.setItem('selectedRestaurants', JSON.stringify(selectedRestaurants));
+    document.location.href = './tournament.html';
+  }
 }
 
 
