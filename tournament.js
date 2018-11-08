@@ -1,6 +1,14 @@
 var winnerShown;
 var totalList;
 
+// Notify the user that leaving the page will reset tournament progress
+window.addEventListener('beforeunload', function(e) {
+	if(!winnerShown) {
+		e.preventDefault();
+		e.returnValue = 'Are you want to leave the page? You will lose all progress and the tournament will reset.';
+	}
+});
+
 $(document).ready(function() {
 
 	totalList =  JSON.parse(sessionStorage.getItem("selectedRestaurants"));
@@ -9,8 +17,8 @@ $(document).ready(function() {
 	$('#topCard').find('.cardTitle').text(totalList[0].name);
 	$('#bottomCard').find('.cardTitle').text(totalList[1].name);
 
-	$('#topAddress').text(totalList[0].address);
-	$('#bottomAddress').text(totalList[1].address);
+	$('#topInfo').html(getInfoText(totalList[0]));
+	$('#bottomInfo').html(getInfoText(totalList[1]));
 
 	$('#topCard').find('.mdl-card__title').css("background","url('"+totalList[0].image_url+"') center");
 	$('#bottomCard').find('.mdl-card__title').css("background","url('"+totalList[1].image_url+"') center");
@@ -39,7 +47,7 @@ function topButtonClick(event){
 	let top = totalList[0]
 	let bottom = totalList[1]
 
-	setCardValue(top.name,bottom.name,top.address,bottom.address,top.image_url,bottom.image_url);
+	setCardValue(top, bottom);
 }
 function bottomButtonClick(event) {
 
@@ -58,9 +66,10 @@ function bottomButtonClick(event) {
 
 	let top = totalList[0]
 	let bottom = totalList[1]
-	setCardValue(top.name,bottom.name,top.address,bottom.address,top.image_url,bottom.image_url);
+	setCardValue(top, bottom);
 }
 
+/*
 function setCardValue(topRestaurantName,bottomRestaurantName,topRestaurantAddress,bottomRestaurantAddress,topRestaurantImagePath,bottomRestaurantImagePath){
 	$('#topCard').find('.cardTitle').text(topRestaurantName);
 	$('#bottomCard').find('.cardTitle').text(bottomRestaurantName);
@@ -72,12 +81,29 @@ function setCardValue(topRestaurantName,bottomRestaurantName,topRestaurantAddres
 	$('#topCard').find('.mdl-card__title').css("background","url('"+topRestaurantImagePath+"') center");
 	$('#bottomCard').find('.mdl-card__title').css("background","url('"+bottomRestaurantImagePath+"') center");
 }
+*/
+
+function setCardValue(topRestaurant, bottomRestaurant) {
+	//Set card titles to the restaurant name
+	$('#topCard').find('.cardTitle').text(topRestaurant.name);
+	$('#bottomCard').find('.cardTitle').text(bottomRestaurant.name);
+	//Display info like address, rating, price, and phone number
+	$('topInfo').html(getInfoText(topRestaurant));
+	$('bottomInfo').html(getInfoText(bottomRestaurant));
+	//Set background image
+	$('#topCard').find('.mdl-card__title').css("background","url('"+topRestaurant.image_url+"') center");
+	$('#bottomCard').find('.mdl-card__title').css("background","url('"+bottomRestaurant.image_url+"') center");
+}
+
+function getInfoText(restaurant) {
+	return `<summary><b>${restaurant.address}</b></summary><br><p><b>Rating:</b> ${restaurant.rating}</p><p><b>Price:</b> ${restaurant.price}</p><b>Phone:</b> ${restaurant.phone}`
+}
 
 function showWinner(winner) {
 	//alert("in show winner");
 	$('.page-content').prepend("<h2>Winner</h2>");
 	$('#topCard').find('.cardTitle').text(winner.name);
-	$('#topAddress').text(winner.address);
+	$('#topInfo').html(getInfoText(winner));
 	$('#topCard').find('.mdl-card__title').css("background","url('"+winner.image_url+"') center");
 	$('#bottomHalf').html('<div></div>');
 }
