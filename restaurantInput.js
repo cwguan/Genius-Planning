@@ -4,6 +4,15 @@
 var selectedRestaurants = [];
 var restaurantsToDisplay = [];
 
+// Check to see if user is leaving page in any OTHER way than clicking the
+// FINISH button as all inputted restuarants will disappear
+var leavePageFromFinishButton = false;
+window.addEventListener('beforeunload', function(e) {
+    if (!leavePageFromFinishButton) {
+      e.preventDefault();
+      e.returnValue = 'Are you want to leave the page? You will lose all progress.';
+    }
+});
 
 $(document).ready(function() {
   // Register a helper function to shorten restaurant names to prevent
@@ -90,7 +99,14 @@ function deleteChip(chipId) {
   Navigation to the next page is handled in html code
   */
 function finish() {
-  sessionStorage.setItem('selectedRestaurants', JSON.stringify(selectedRestaurants));
+  if (selectedRestaurants.length < 2 ) {
+    alert('Please add at least 2 restuarants!');
+  } else {
+    sessionStorage.setItem('selectedRestaurants', JSON.stringify(selectedRestaurants));
+    // Flag for valid navagation away from the restaurantInput page
+    leavePageFromFinishButton = true;
+    document.location.href = './tournament.html';
+  }
 }
 
 
