@@ -1,9 +1,7 @@
 var winnerShown;
 var totalList;
-<<<<<<< HEAD
 var index;
 var startlength;
-=======
 
 // Notify the user that leaving the page will reset tournament progress
 window.addEventListener('beforeunload', function(e) {
@@ -13,7 +11,7 @@ window.addEventListener('beforeunload', function(e) {
 	}
 });
 
->>>>>>> master
+
 $(document).ready(function() {
 
 	totalList =  JSON.parse(sessionStorage.getItem("selectedRestaurants"));
@@ -36,9 +34,7 @@ $(document).ready(function() {
 
 $("#topButton").click(topButtonClick);
 $("#bottomButton").click(bottomButtonClick);
-document.querySelector('#p1').addEventListener('mdl-componentupgraded', function() {
-    this.MaterialProgress.setProgress(44);
-  });
+
 
 function topButtonClick(event){
 	totalList.push(totalList.shift()); //add the first element in html
