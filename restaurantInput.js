@@ -59,6 +59,7 @@ function findRestaurantInDB(restaurantName, addressValue) {
   for (var i = 0; i < restaurantData.length; i++) {
     if (restaurantData[i].name === restaurantName && restaurantData[i].address === addressValue) {
       console.log(`Found restaurant: ${restaurantName} === ${addressValue}`);
+      checkNAFields(restaurantData[i]);
       return restaurantData[i];
     }
   }
@@ -71,6 +72,13 @@ function findRestaurantInDB(restaurantName, addressValue) {
       'rating': 0.0,
       'image_url': './img/image-not-found.png'
   }
+}
+
+function checkNAFields(restaurant) {
+    if(!restaurant.phone) restaurant.phone = "NA";
+    if(!restaurant.price) restaurant.price = "NA";
+    if(!restaurant.rating) restaurant.rating = "NA";
+    if(!restaurant.image_url) restaurant.image_url = './img/image-not-found.png';
 }
 
 
