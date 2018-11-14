@@ -10,6 +10,7 @@
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="style/style.css" />
 
   <!-- Wide card with share menu button -->
@@ -32,6 +33,15 @@
   #bottomCard > .mdl-card__title{
     background-size: 50px 176px;
     background-repeat: no-repeat;
+  }
+  #widthVal{
+    width: 512px;
+  }
+  .choosen{
+    background-color: rgba(0,254,0,0.5);
+  }
+  .notchoosen{
+    background-color: rgba(254,0,0,0.5);
   }
   </style>
 </head>
@@ -62,53 +72,54 @@
               </div>
           </div>
 
+          <div class="mdl-grid width">
+            <div id="p1" class="mdl-progress mdl-js-progress "></div>
+          </div>
           <div class="page-content">
-              <!-- start of card one-->
-              <div id="topHalf">
-                <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="topCard">
-                  <div class="mdl-card__title">
-                    <h2 class="mdl-card__title-text cardTitle"></h2>
-                  </div>
-                  <div class="mdl-card__supporting-text">
-                      <details id="topInfo">
-                      </details>
-                  </div>
-                  <div class="mdl-card__actions mdl-card--border" id="topButton">
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" >
-                      Choose
-                    </a>
-                  </div>
+            <!-- start of card one-->
+            
+            <div id="topHalf">
+              <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="topCard">
+                <div class="mdl-card__title">
+                  <h2 class="mdl-card__title-text cardTitle"></h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <details id="topInfo">
+                    </details>
+                </div>
+                <div class="mdl-card__actions mdl-card--border" id="topButton">
+                  <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" >
+                    Choose
+                  </a>
                 </div>
               </div>
-
-                <!-- end of card one-->
-                <br/>
-
-
-
-                <!-- start of card two-->
-
-                <div id="bottomHalf">
-                  <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="bottomCard">
-                  <div class="mdl-card__title">
-                    <h2 class="mdl-card__title-text cardTitle"></h2>
-                  </div>
-                  <div class="mdl-card__supporting-text">
-                      <details  id="bottomInfo">
-                      </details>
-                  </div>
-                  <div class="mdl-card__actions mdl-card--border" id="bottomButton">
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                      Choose
-                    </a>
-                  </div>
-                </div>
-                </div>
             </div>
+
+              <!-- end of card one-->
+              <br/>
+              <!-- start of card two-->
+            <div id="bottomHalf">
+              <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="bottomCard">
+              <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text cardTitle"></h2>
+              </div>
+              <div class="mdl-card__supporting-text">
+                  <details  id="bottomInfo">
+                  </details>
+              </div>
+              <div class="mdl-card__actions mdl-card--border" id="bottomButton">
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                  Choose
+                </a>
+              </div>
+            </div>
+            </div>
+          </div>
       </div>
     </main>
   </div> <!--End outermost container-->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="tournament.js"></script>
   <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 

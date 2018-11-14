@@ -1,6 +1,10 @@
 var winnerShown;
 var totalList;
-
+var index;
+var totalLength;
+var restaurantLeft;
+var progressNum;
+var numRounds;
 // Notify the user that leaving the page will reset tournament progress
 window.addEventListener('beforeunload', function(e) {
 	if(!winnerShown) {
@@ -9,11 +13,14 @@ window.addEventListener('beforeunload', function(e) {
 	}
 });
 
+
 $(document).ready(function() {
+	//$('#carouselExampleControls').carousel({});
 
 	totalList =  JSON.parse(sessionStorage.getItem("selectedRestaurants"));
+	progressNum = totalList.length*1.0-1;
+	numRounds = 0;
 	winnerShown = false;
-
 	$('#topCard').find('.cardTitle').text(totalList[0].name);
 	$('#bottomCard').find('.cardTitle').text(totalList[1].name);
 
@@ -23,17 +30,18 @@ $(document).ready(function() {
 	$('#topCard').find('.mdl-card__title').css("background","url('"+totalList[0].image_url+"') center");
 	$('#bottomCard').find('.mdl-card__title').css("background","url('"+totalList[1].image_url+"') center");
 
-	//$('#topCard.mdl-card__title').css("background-size",50+"px " + 70 + "%");
-	//$('#topCard.mdl-card__title').css("background-repeat","no-repeat");
 })
 
 $("#topButton").click(topButtonClick);
 $("#bottomButton").click(bottomButtonClick);
 
+
 function topButtonClick(event){
 	totalList.push(totalList.shift()); //add the first element in html
 	totalList.shift();
-
+	numRounds++;
+	//document.querySelector('#p1').MaterialProgress.setProgress(100-( (restaurantLeft*100.0)/totalLength ));
+	document.querySelector('#p1').MaterialProgress.setProgress((numRounds/progressNum)*100.0);
 	if(totalList.length <= 1){
 		winnerShown = true;
 		showWinner(totalList[0]);
@@ -53,7 +61,8 @@ function bottomButtonClick(event) {
 
 	totalList.shift();
 	totalList.push(totalList.shift()); //add the first element in html
-
+	numRounds++;
+	document.querySelector('#p1').MaterialProgress.setProgress((numRounds/progressNum)*100.0);
 	if(totalList.length <= 1){
 		winnerShown = true;
 		showWinner(totalList[0]);
