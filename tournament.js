@@ -1,8 +1,10 @@
 var winnerShown;
 var totalList;
 var index;
-var startlength;
-
+var totalLength;
+var restaurantLeft;
+var progressNum;
+var numRounds;
 // Notify the user that leaving the page will reset tournament progress
 window.addEventListener('beforeunload', function(e) {
 	if(!winnerShown) {
@@ -13,11 +15,12 @@ window.addEventListener('beforeunload', function(e) {
 
 
 $(document).ready(function() {
+	//$('#carouselExampleControls').carousel({});
 
 	totalList =  JSON.parse(sessionStorage.getItem("selectedRestaurants"));
+	progressNum = totalList.length*1.0-1;
+	numRounds = 0;
 	winnerShown = false;
-	index = 1;
-	startlength = totalList.length;
 	$('#topCard').find('.cardTitle').text(totalList[0].name);
 	$('#bottomCard').find('.cardTitle').text(totalList[1].name);
 
@@ -35,12 +38,16 @@ $(document).ready(function() {
 $("#topButton").click(topButtonClick);
 $("#bottomButton").click(bottomButtonClick);
 
-
+function doNothing() {
+	console.log("nothing");
+	// body...
+}
 function topButtonClick(event){
 	totalList.push(totalList.shift()); //add the first element in html
 	totalList.shift();
-	index++;
-	document.querySelector('#p1').MaterialProgress.setProgress(((index*100.0)/startlength));
+	numRounds++;
+	//document.querySelector('#p1').MaterialProgress.setProgress(100-( (restaurantLeft*100.0)/totalLength ));
+	document.querySelector('#p1').MaterialProgress.setProgress((numRounds/progressNum)*100.0);
 	if(totalList.length <= 1){
 		winnerShown = true;
 		showWinner(totalList[0]);
@@ -60,9 +67,8 @@ function bottomButtonClick(event) {
 
 	totalList.shift();
 	totalList.push(totalList.shift()); //add the first element in html
-	index++;
-	//document.querySelector
-	document.querySelector('#p1').MaterialProgress.setProgress(((index*100.0)/startlength));
+	numRounds++;
+	document.querySelector('#p1').MaterialProgress.setProgress((numRounds/progressNum)*100.0);
 	if(totalList.length <= 1){
 		winnerShown = true;
 		showWinner(totalList[0]);
