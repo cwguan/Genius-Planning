@@ -43,6 +43,13 @@
   .notchoosen{
     background-color: rgba(254,0,0,0.5);
   }
+
+  .cardTitleBackground {
+    background-color: rgba(90, 90, 90, 0.6);
+    margin-top: auto;
+    border-radius: 0.75rem;
+    padding: 1rem;
+  }
   </style>
 </head>
 
@@ -77,11 +84,13 @@
           </div>
           <div class="page-content">
             <!-- start of card one-->
-            
+
             <div id="topHalf">
               <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="topCard">
                 <div class="mdl-card__title">
-                  <h2 class="mdl-card__title-text cardTitle"></h2>
+                  <div class="cardTitleBackground">
+                    <h2 class="mdl-card__title-text cardTitle"></h2>
+                  </div>
                 </div>
                 <div class="mdl-card__supporting-text">
                     <details id="topInfo">
@@ -101,7 +110,9 @@
             <div id="bottomHalf">
               <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="bottomCard">
               <div class="mdl-card__title">
-                <h2 class="mdl-card__title-text cardTitle"></h2>
+                <div class="cardTitleBackground">
+                  <h2 class="mdl-card__title-text cardTitle"></h2>
+                </div>
               </div>
               <div class="mdl-card__supporting-text">
                   <details  id="bottomInfo">
