@@ -26,7 +26,7 @@
                 <div class="centered-container">
                     <div class="description-card mdl-card mdl-shadow--2dp">
                         <div class="mdl-card__title">
-                            <h2 class="mdl-card__title-text  description-title">Enter Your Restaurants</h2>
+                            <h2 class="mdl-card__title-text  description-title">Enter Your Restaurants (2 minimum)</h2>
                         </div>
                         <div class="mdl-card__supporting-text description-text">
                             Start typing your chosen restaurants & select to enter them into the tournament!
@@ -48,11 +48,22 @@
 
                 <!-- Container to add chips to when user selects restaurants -->
                 <div id="chipContainer" class="chip-container">
+                    <span class="mdl-chip mdl-chip--contact mdl-chip--deletable restaurant-chip" id="defaultRestaurant1">
+                        <img class="mdl-chip__contact" src="./img/cutlery.jpg"></img>
+                        <span class="mdl-chip__text">Restaurant #1</span>
+                        <a href="#" onclick="deleteDefaultChip(1)" class="mdl-chip__action"><i class="material-icons">close</i></a>
+                    </span>
+                    <span class="mdl-chip mdl-chip--contact mdl-chip--deletable restaurant-chip" id="defaultRestaurant2">
+                        <img class="mdl-chip__contact" src="./img/forkandknife.png"></img>
+                        <span class="mdl-chip__text">Restaurant #2</span>
+                        <a href="#" onclick="deleteDefaultChip(2)" class="mdl-chip__action"><i class="material-icons">close</i></a>
+                    </span>
+                    <span id="suggestionMessage">Add Even More...</span>
                 </div>
             </main>
             <footer>
                 <div class="centered-container">
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="finish-button" onclick="finish();">
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="finish-button" onclick="finish();" style="display:none;">
                         FINISH
                     </button>
                 </div>
