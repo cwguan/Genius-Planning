@@ -50,6 +50,14 @@
     border-radius: 0.75rem;
     padding: 1rem;
   }
+
+  #topConfirmBtn {
+    display: none;
+  }
+
+  #bottomConfirmBtn {
+    display: none;
+  }
   </style>
 </head>
 
@@ -96,9 +104,12 @@
                     <details id="topInfo">
                     </details>
                 </div>
-                <div class="mdl-card__actions mdl-card--border" id="topButton">
-                  <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" >
+                <div class="mdl-card__actions mdl-card--border">
+                  <a id="topChooseBtn" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" >
                     Choose
+                  </a>
+                  <a id="topConfirmBtn" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" >
+                    Confirm Choice
                   </a>
                 </div>
               </div>
@@ -118,9 +129,12 @@
                   <details  id="bottomInfo">
                   </details>
               </div>
-              <div class="mdl-card__actions mdl-card--border" id="bottomButton">
-                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+              <div class="mdl-card__actions mdl-card--border">
+                <a id="bottomChooseBtn" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
                   Choose
+                </a>
+                <a id="bottomConfirmBtn" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                  Confirm Choice
                 </a>
               </div>
             </div>

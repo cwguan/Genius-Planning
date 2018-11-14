@@ -32,23 +32,41 @@ $(document).ready(function() {
 
 })
 
-$("#topButton").click(topButtonClick);
-$("#bottomButton").click(bottomButtonClick);
+$("#topChooseBtn").click(topChooseBtnClick);
+$("#bottomChooseBtn").click(bottomChooseBtnClick);
+$("#topConfirmBtn").click(topConfirmBtnClick);
+$("#bottomConfirmBtn").click(bottomConfirmBtnClick);
+
+// The following two functions display corresponding confirm buttons & hides the other
+function topChooseBtnClick() {
+	$("#topConfirmBtn").css("display", "inline");
+	$("#bottomConfirmBtn").css("display", "none");
+}
 
 
-function topButtonClick(event){
+function bottomChooseBtnClick() {
+	$("#bottomConfirmBtn").css("display", "inline");
+	$("#topConfirmBtn").css("display", "none");
+}
+
+
+function topConfirmBtnClick(event){
 	totalList.push(totalList.shift()); //add the first element in html
 	totalList.shift();
+
+	// Update progress bar
 	numRounds++;
-	//document.querySelector('#p1').MaterialProgress.setProgress(100-( (restaurantLeft*100.0)/totalLength ));
 	document.querySelector('#p1').MaterialProgress.setProgress((numRounds/progressNum)*100.0);
+
+	// Hide confirm button for following round
+	$("#topConfirmBtn").css("display", "none");
+
 	if(totalList.length <= 1){
 		winnerShown = true;
 		showWinner(totalList[0]);
-		//$("#topButton").prop("disabled",true);
-		$("#topButton").attr('disabled','disabled');
-		$("#topButton").children().attr("disabled","disabled");
-		$("#topButton").off("click");
+		$("#topChooseBtn").attr('disabled','disabled');
+		$("#topChooseBtn").children().attr("disabled","disabled");
+		$("#topChooseBtn").off("click");
 		return;
 	}
 
@@ -57,19 +75,26 @@ function topButtonClick(event){
 
 	setCardValue(top, bottom);
 }
-function bottomButtonClick(event) {
+
+
+function bottomConfirmBtnClick(event) {
 
 	totalList.shift();
 	totalList.push(totalList.shift()); //add the first element in html
+
+	// Update progress bar
 	numRounds++;
 	document.querySelector('#p1').MaterialProgress.setProgress((numRounds/progressNum)*100.0);
+
+	// Hide confirm button for following round
+	$("#bottomConfirmBtn").css("display", "none");
+
 	if(totalList.length <= 1){
 		winnerShown = true;
 		showWinner(totalList[0]);
-		//$("#topButton").prop("disabled",true);
-		$("#topButton").attr('disabled','disabled');
-		$("#topButton").children().attr("disabled","disabled");
-		$("#topButton").off("click");
+		$("#topChooseBtn").attr('disabled','disabled');
+		$("#topChooseBtn").children().attr("disabled","disabled");
+		$("#topChooseBtn").off("click");
 		return;
 	}
 
