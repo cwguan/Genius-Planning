@@ -30,18 +30,12 @@ $(document).ready(function() {
 	$('#topCard').find('.mdl-card__title').css("background","url('"+totalList[0].image_url+"') center");
 	$('#bottomCard').find('.mdl-card__title').css("background","url('"+totalList[1].image_url+"') center");
 
-	//document.querySelector('#p1').MaterialProgress.setProgress(0);
-	//$('#topCard.mdl-card__title').css("background-size",50+"px " + 70 + "%");
-	//$('#topCard.mdl-card__title').css("background-repeat","no-repeat");
 })
 
 $("#topButton").click(topButtonClick);
 $("#bottomButton").click(bottomButtonClick);
 
-function doNothing() {
-	console.log("nothing");
-	// body...
-}
+
 function topButtonClick(event){
 	totalList.push(totalList.shift()); //add the first element in html
 	totalList.shift();
