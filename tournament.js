@@ -131,7 +131,7 @@ function setCardValue(topRestaurant, bottomRestaurant) {
 }
 
 function getInfoText(restaurant) {
-	return `<summary><b>${restaurant.address}</b></summary><br><p><b>Rating:</b> ${restaurant.rating}</p><p><b>Price:</b> ${restaurant.price}</p><b>Phone:</b> ${restaurant.phone}`
+	return `<summary><b>${restaurant.address}</b></summary><br><p><b>Rating:</b> ${restaurant.rating}</p><p><b>Price:</b> ${restaurant.price}</p><p><b>Phone:</b> ${restaurant.phone}</p>`;
 }
 
 function showWinner(winner) {
