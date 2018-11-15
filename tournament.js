@@ -131,7 +131,6 @@ function setCardValue(topRestaurant, bottomRestaurant) {
 }
 
 function getInfoText(restaurant) {
-	console.log("getting new info");
 	return `<summary><b>${restaurant.address}</b></summary><br><p><b>Rating:</b> ${restaurant.rating}</p><p><b>Price:</b> ${restaurant.price}</p><p><b>Phone:</b> ${restaurant.phone}</p>`;
 }
 
