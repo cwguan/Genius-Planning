@@ -159,7 +159,7 @@ function finish() {
     sessionStorage.setItem('selectedRestaurants', JSON.stringify(selectedRestaurants));
     // Flag for valid navagation away from the restaurantInput page
     leavePageFromFinishButton = true;
-    document.location.href = './tournament.html';
+    document.location.href = './shareLink.html';
   }
 }
 
