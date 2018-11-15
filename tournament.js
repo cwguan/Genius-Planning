@@ -41,12 +41,16 @@ $("#bottomConfirmBtn").click(bottomConfirmBtnClick);
 function topChooseBtnClick() {
 	$("#topConfirmBtn").css("display", "inline");
 	$("#bottomConfirmBtn").css("display", "none");
+	$("#topCard").addClass("chosen");
+	$("#bottomCard").addClass("notchosen");
 }
 
 
 function bottomChooseBtnClick() {
 	$("#bottomConfirmBtn").css("display", "inline");
 	$("#topConfirmBtn").css("display", "none");
+	$("#topCard").addClass("notchosen");
+	$("#bottomCard").addClass("chosen");
 }
 
 
@@ -74,6 +78,7 @@ function topConfirmBtnClick(event){
 	let bottom = totalList[1]
 	setCardValue(top, bottom);
 	updateUpNextCard();
+	clearchosenTint();
 }
 
 
@@ -103,21 +108,9 @@ function bottomConfirmBtnClick(event) {
 	let bottom = totalList[1]
 	setCardValue(top, bottom);
 	updateUpNextCard();
+	clearchosenTint();
 }
 
-/*
-function setCardValue(topRestaurantName,bottomRestaurantName,topRestaurantAddress,bottomRestaurantAddress,topRestaurantImagePath,bottomRestaurantImagePath){
-	$('#topCard').find('.cardTitle').text(topRestaurantName);
-	$('#bottomCard').find('.cardTitle').text(bottomRestaurantName);
-
-	$('#topAddress').text(topRestaurantAddress);
-	$('#bottomAddress').text(bottomRestaurantAddress);
-
-	//alert(bottomCardList[indexBottom]);
-	$('#topCard').find('.mdl-card__title').css("background","url('"+topRestaurantImagePath+"') center");
-	$('#bottomCard').find('.mdl-card__title').css("background","url('"+bottomRestaurantImagePath+"') center");
-}
-*/
 
 function setCardValue(topRestaurant, bottomRestaurant) {
 	//Set card titles to the restaurant name
@@ -144,6 +137,7 @@ function showWinner(winner) {
 	$('#bottomHalf').html('<div></div>');
 
 	updateUpNextCard();
+	clearchosenTint();
 }
 
 
@@ -174,4 +168,12 @@ function updateUpNextCard() {
 				$("#upNext").first().html(`<h2>Up Next:</h2><h4>${restaurantName1}</h4><p>vs.</p><h4>${restaurantName2}</h4>`);
 			}
 	}
+}
+
+function clearchosenTint() {
+	$("#topCard").removeClass("chosen");
+	$("#topCard").removeClass("notchosen");
+	$("#bottomCard").removeClass("chosen");
+	$("#bottomCard").removeClass("notchosen");
+
 }
