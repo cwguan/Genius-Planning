@@ -123,8 +123,8 @@ function setCardValue(topRestaurant, bottomRestaurant) {
 	$('#topCard').find('.cardTitle').text(topRestaurant.name);
 	$('#bottomCard').find('.cardTitle').text(bottomRestaurant.name);
 	//Display info like address, rating, price, and phone number
-	$('topInfo').html(getInfoText(topRestaurant));
-	$('bottomInfo').html(getInfoText(bottomRestaurant));
+	$('#topInfo').html(getInfoText(topRestaurant));
+	$('#bottomInfo').html(getInfoText(bottomRestaurant));
 	//Set background image
 	$('#topCard').find('.mdl-card__title').css("background","url('"+topRestaurant.image_url+"') center");
 	$('#bottomCard').find('.mdl-card__title').css("background","url('"+bottomRestaurant.image_url+"') center");
