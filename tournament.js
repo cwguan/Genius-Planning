@@ -29,7 +29,7 @@ $(document).ready(function() {
 
 	$('#topCard').find('.mdl-card__title').css("background","url('"+totalList[0].image_url+"') center");
 	$('#bottomCard').find('.mdl-card__title').css("background","url('"+totalList[1].image_url+"') center");
-
+	updateUpNextCard();
 })
 
 $("#topChooseBtn").click(topChooseBtnClick);
@@ -41,12 +41,16 @@ $("#bottomConfirmBtn").click(bottomConfirmBtnClick);
 function topChooseBtnClick() {
 	$("#topConfirmBtn").css("display", "inline");
 	$("#bottomConfirmBtn").css("display", "none");
+	$("#topCard").addClass("chosen");
+	$("#bottomCard").addClass("notchosen");
 }
 
 
 function bottomChooseBtnClick() {
 	$("#bottomConfirmBtn").css("display", "inline");
 	$("#topConfirmBtn").css("display", "none");
+	$("#topCard").addClass("notchosen");
+	$("#bottomCard").addClass("chosen");
 }
 
 
@@ -72,8 +76,9 @@ function topConfirmBtnClick(event){
 
 	let top = totalList[0]
 	let bottom = totalList[1]
-
 	setCardValue(top, bottom);
+	updateUpNextCard();
+	clearchosenTint();
 }
 
 
@@ -89,6 +94,7 @@ function bottomConfirmBtnClick(event) {
 	// Hide confirm button for following round
 	$("#bottomConfirmBtn").css("display", "none");
 
+
 	if(totalList.length <= 1){
 		winnerShown = true;
 		showWinner(totalList[0]);
@@ -101,21 +107,10 @@ function bottomConfirmBtnClick(event) {
 	let top = totalList[0]
 	let bottom = totalList[1]
 	setCardValue(top, bottom);
+	updateUpNextCard();
+	clearchosenTint();
 }
 
-/*
-function setCardValue(topRestaurantName,bottomRestaurantName,topRestaurantAddress,bottomRestaurantAddress,topRestaurantImagePath,bottomRestaurantImagePath){
-	$('#topCard').find('.cardTitle').text(topRestaurantName);
-	$('#bottomCard').find('.cardTitle').text(bottomRestaurantName);
-
-	$('#topAddress').text(topRestaurantAddress);
-	$('#bottomAddress').text(bottomRestaurantAddress);
-
-	//alert(bottomCardList[indexBottom]);
-	$('#topCard').find('.mdl-card__title').css("background","url('"+topRestaurantImagePath+"') center");
-	$('#bottomCard').find('.mdl-card__title').css("background","url('"+bottomRestaurantImagePath+"') center");
-}
-*/
 
 function setCardValue(topRestaurant, bottomRestaurant) {
 	//Set card titles to the restaurant name
@@ -140,4 +135,45 @@ function showWinner(winner) {
 	$('#topInfo').html(getInfoText(winner));
 	$('#topCard').find('.mdl-card__title').css("background","url('"+winner.image_url+"') center");
 	$('#bottomHalf').html('<div></div>');
+
+	updateUpNextCard();
+	clearchosenTint();
+}
+
+
+function updateUpNextCard() {
+	// If a winner has been shown, remove the card from view
+	if (winnerShown) {
+		$("#upNext").remove();
+		return;
+	}
+
+	switch(totalList.length) {
+		// Last Round case, no other restaurants to be next
+		case 2:
+			$("#upNext").first().html(`<h2>Last Round!</h2>`);
+			break;
+
+		// 3 restaurants left; 2 being displayed in cards & 1 left in list
+		case 3:
+			var restaurantName1 = totalList[2].name;
+			$("#upNext").first().html(`<h2>Up Next:</h2><h4>The current round winner</h4><p>vs.</p><h4>${restaurantName1}!</h4>`);
+			break;
+
+		// Default case; 2 restaurants being displayed in cards & 2+ left in list
+		default:
+			if (totalList.length > 3) {
+				var restaurantName1 = totalList[2].name;
+				var restaurantName2 = totalList[3].name;
+				$("#upNext").first().html(`<h2>Up Next:</h2><h4>${restaurantName1}</h4><p>vs.</p><h4>${restaurantName2}</h4>`);
+			}
+	}
+}
+
+function clearchosenTint() {
+	$("#topCard").removeClass("chosen");
+	$("#topCard").removeClass("notchosen");
+	$("#bottomCard").removeClass("chosen");
+	$("#bottomCard").removeClass("notchosen");
+
 }
