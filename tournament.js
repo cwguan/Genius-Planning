@@ -41,16 +41,22 @@ $("#bottomConfirmBtn").click(bottomConfirmBtnClick);
 function topChooseBtnClick() {
 	$("#topConfirmBtn").css("display", "inline");
 	$("#bottomConfirmBtn").css("display", "none");
+
 	$("#topCard").addClass("chosen");
+	$("#topCard").removeClass("notchosen");
 	$("#bottomCard").addClass("notchosen");
+	$("#bottomCard").removeClass("chosen");
 }
 
 
 function bottomChooseBtnClick() {
 	$("#bottomConfirmBtn").css("display", "inline");
 	$("#topConfirmBtn").css("display", "none");
+
 	$("#topCard").addClass("notchosen");
+	$("#topCard").removeClass("chosen");
 	$("#bottomCard").addClass("chosen");
+	$("#bottomCard").removeClass("notchosen");
 }
 
 
