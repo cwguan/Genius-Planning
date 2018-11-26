@@ -74,9 +74,12 @@ function topConfirmBtnClick(event){
 	if(totalList.length <= 1){
 		winnerShown = true;
 		showWinner(totalList[0]);
-		$("#topChooseBtn").attr('disabled','disabled');
-		$("#topChooseBtn").children().attr("disabled","disabled");
+		// $("#topChooseBtn").attr('disabled','disabled');
+		// $("#topChooseBtn").children().attr("disabled","disabled");
+		// $("#topChooseBtn").off("click");
+		$("#topChooseBtn").text("MAP");
 		$("#topChooseBtn").off("click");
+		$("#topChooseBtn").attr("href","http://maps.google.com/?q="+totalList[0].address);
 		return;
 	}
 
@@ -104,9 +107,12 @@ function bottomConfirmBtnClick(event) {
 	if(totalList.length <= 1){
 		winnerShown = true;
 		showWinner(totalList[0]);
-		$("#topChooseBtn").attr('disabled','disabled');
-		$("#topChooseBtn").children().attr("disabled","disabled");
+		// $("#topChooseBtn").attr('disabled','disabled');
+		// $("#topChooseBtn").children().attr("disabled","disabled");
+		// $("#topChooseBtn").off("click");
+		$("#topChooseBtn").text("MAP");
 		$("#topChooseBtn").off("click");
+		$("#topChooseBtn").attr("href","http://maps.google.com/?q="+totalList[0].address);
 		return;
 	}
 
