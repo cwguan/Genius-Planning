@@ -32,14 +32,14 @@
                             Start typing your chosen restaurants & select to enter them into the tournament!
                         </div>
                     </div>
-                
+
                     <div class="search-container mdl-shadow--2dp">
                         <form autocomplete="off">
-                            <button type="submit" class="search-bar-icon"><i class="material-icons">search</i></button>
+                            <i class="material-icons dead-search-bar-icon">search</i>
                             <div class="autocomplete">
                               <input id="restaurantInput" type="text" placeholder="Search for restaurants..." name="search" autocomplete="off">
                             </div>
-                            <button type="submit" class="search-bar-icon"><i class="material-icons">close</i></button>
+                            <i class="material-icons search-bar-icon"  onclick="console.log('Pressed'); document.getElementById('restaurantInput').value = '';">close</i>
                         </form>
                     </div>
                 </div>
