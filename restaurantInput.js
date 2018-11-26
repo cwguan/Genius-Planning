@@ -278,3 +278,7 @@ function autocomplete(inp, db) {
 
 // Adds autocomplete & resturant selection to our search box
 autocomplete(document.getElementById("restaurantInput"), restaurantData);
+
+document.getElementById("suggestionMessage").addEventListener("click", () => {
+    $("#restaurantInput").focus();
+})
