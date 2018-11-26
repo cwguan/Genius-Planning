@@ -5,6 +5,7 @@ var selectedRestaurants = [];
 var restaurantsToDisplay = [];
 var defaultRestaurant1Deleted = false;
 var defaultRestaurant2Deleted = false;
+var suggestedRestaurants = [];
 
 // Check to see if user is leaving page in any OTHER way than clicking the
 // FINISH button as all inputted restuarants will disappear
@@ -29,12 +30,28 @@ $(document).ready(function() {
           return opts.fn(this);
       }
   });
+
+  // Register a helper function to shorten restaurant names to prevent
+  // overflow in chips for suggested restaurants
+  Handlebars.registerHelper('modifyname2', function(a, opts) {
+      if(a.length > 17) {
+          var modifiedName = a.slice(0, 17);
+          modifiedName += "...";
+          return modifiedName;
+      }
+      else {
+          return opts.fn(this);
+      }
+  });
+
   if(selectedRestaurants.length < 2) {
       $("#defaultRestaurant1").fadeIn();
       $("#defaultRestaurant2").fadeIn();
       $("#suggestionMessage").fadeIn();
   }
   updateChipContainer();
+  generateRandomSuggestedRestaurants();
+  displayRandomSuggestedRestaurants();
 });
 
 
@@ -281,4 +298,34 @@ autocomplete(document.getElementById("restaurantInput"), restaurantData);
 
 document.getElementById("suggestionMessage").addEventListener("click", () => {
     $("#restaurantInput").focus();
-})
+});
+
+function generateRandomSuggestedRestaurants() {
+  var numSuggestedRestaurants = 3;
+  for (var i = 0; i < numSuggestedRestaurants; i++) {
+    var randomIndex = Math.floor(Math.random() * restaurantData.length);
+    suggestedRestaurants.push(findRestaurantInDB(restaurantData[randomIndex].name, restaurantData[randomIndex].address));
+  }
+  console.log(suggestedRestaurants);
+}
+
+
+function displayRandomSuggestedRestaurants() {
+  // compile the template
+  var source   = $("#suggested-chip-template").html();
+  var template = Handlebars.compile(source);
+
+  var parentDiv = $("#suggestedRestaurantsChipContainer");
+
+  for (var i = 0; i < suggestedRestaurants.length; i++) {
+      var curRestaurant = suggestedRestaurants[i];
+      var curHtml = template(curRestaurant);
+      parentDiv.append(curHtml);
+  }
+
+
+  suggestedRestaurants.forEach(function(restaurant) {
+    $("#suggestedRestaurantsUL").append(`<li>${restaurant.name}</li>`)
+  });
+
+}
