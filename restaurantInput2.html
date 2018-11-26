@@ -57,18 +57,20 @@
                 </div>
 
                 <!-- Container to add chips to when user selects restaurants -->
-                <div id="chipContainer" class="chip-container">
-                    <span class="mdl-chip mdl-chip--contact mdl-chip--deletable restaurant-chip" id="defaultRestaurant1">
-                        <img class="mdl-chip__contact" src="./img/cutlery.jpg"></img>
-                        <span class="mdl-chip__text">Restaurant #1</span>
-                        <a href="#" onclick="deleteDefaultChip(1)" class="mdl-chip__action"><i class="material-icons">close</i></a>
-                    </span>
-                    <span class="mdl-chip mdl-chip--contact mdl-chip--deletable restaurant-chip" id="defaultRestaurant2">
-                        <img class="mdl-chip__contact" src="./img/forkandknife.png"></img>
-                        <span class="mdl-chip__text">Restaurant #2</span>
-                        <a href="#" onclick="deleteDefaultChip(2)" class="mdl-chip__action"><i class="material-icons">close</i></a>
-                    </span>
-                    <span id="suggestionMessage">Add Even More...</span>
+                <div class="centered-container">
+                  <div id="chipContainer" class="chip-container">
+                      <span class="mdl-chip mdl-chip--contact mdl-chip--deletable restaurant-chip" id="defaultRestaurant1">
+                          <img class="mdl-chip__contact" src="./img/cutlery.jpg"></img>
+                          <span class="mdl-chip__text">Restaurant #1</span>
+                          <a href="#" onclick="deleteDefaultChip(1)" class="mdl-chip__action"><i class="material-icons">close</i></a>
+                      </span>
+                      <span class="mdl-chip mdl-chip--contact mdl-chip--deletable restaurant-chip" id="defaultRestaurant2">
+                          <img class="mdl-chip__contact" src="./img/forkandknife.png"></img>
+                          <span class="mdl-chip__text">Restaurant #2</span>
+                          <a href="#" onclick="deleteDefaultChip(2)" class="mdl-chip__action"><i class="material-icons">close</i></a>
+                      </span>
+                      <span id="suggestionMessage">Add Even More...</span>
+                  </div>
                 </div>
             </main>
             <footer>
@@ -98,7 +100,7 @@
 
         <!-- Handlebars template for suggested restaurant chips -->
         <script id="suggested-chip-template" type="text/x-handlebars-template">
-          <span class="mdl-chip mdl-chip--contact restaurant-chip" id="{{name}}==={{address}}">
+          <span class="mdl-chip mdl-chip--contact restaurant-chip suggested" id="{{name}}==={{address}}">
               <img class="mdl-chip__contact" src="{{image_url}}"></img>
               <span class="mdl-chip__text">{{#modifyname2 name}}{{name}}{{/modifyname2}}</span>
           </span>

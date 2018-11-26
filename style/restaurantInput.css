@@ -154,6 +154,11 @@ input[type=submit] {
   color: #ffffff;
 }
 
+#chipContainer {
+  border: 1px solid;
+  width: 95%;
+}
+
 #suggestedRestaurantsChipContainer {
   height: 120px;
 }
