@@ -26,8 +26,18 @@
     background-color: #FBFBFB;
     border: none;
     padding: 6px 10px;
-    font-size: 17px;
+    font-size: 28px;
     cursor: pointer;
+    position: relative;
+    top: 8px;
+}
+
+.dead-search-bar-icon {
+    background-color: #FBFBFB;
+    border: none;
+    padding: 6px 10px;
+    font-size: 28px;
+    cursor: auto;
     position: relative;
     top: 8px;
 }
@@ -142,4 +152,18 @@ input[type=submit] {
   /*when navigating through the items using the arrow keys:*/
   background-color: DodgerBlue !important;
   color: #ffffff;
+}
+
+#chipContainer {
+  border: 1px solid;
+  width: 95%;
+}
+
+#suggestedRestaurantsChipContainer {
+  height: 120px;
+}
+
+.suggested-restaurant-chip {
+  width: 400px;
+  font-size: 20px;
 }
