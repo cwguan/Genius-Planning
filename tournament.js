@@ -80,6 +80,7 @@ function topConfirmBtnClick(event){
 		$("#topChooseBtn").text("MAP");
 		$("#topChooseBtn").off("click");
 		$("#topChooseBtn").attr("href","http://maps.google.com/?q="+totalList[0].address);
+		$("#topChooseBtn").attr("target", "_blank");
 		return;
 	}
 
@@ -113,6 +114,7 @@ function bottomConfirmBtnClick(event) {
 		$("#topChooseBtn").text("MAP");
 		$("#topChooseBtn").off("click");
 		$("#topChooseBtn").attr("href","http://maps.google.com/?q="+totalList[0].address);
+		$("#topChooseBtn").attr("target", "_blank");
 		return;
 	}
 
