@@ -5,6 +5,19 @@ var totalLength;
 var restaurantLeft;
 var progressNum;
 var numRounds;
+var yelpStarMap = new Map();
+
+yelpStarMap.set(0, "./img/yelp-stars/small_0@2x.png");
+yelpStarMap.set(1, "./img/yelp-stars/small_1@2x.png");
+yelpStarMap.set(1.5, "./img/yelp-stars/small_1_half@2x.png");
+yelpStarMap.set(2, "./img/yelp-stars/small_2@2x.png");
+yelpStarMap.set(2.5, "./img/yelp-stars/small_2_half@2x.png");
+yelpStarMap.set(3, "./img/yelp-stars/small_3@2x.png");
+yelpStarMap.set(3.5, "./img/yelp-stars/small_3_half@2x.png");
+yelpStarMap.set(4, "./img/yelp-stars/small_4@2x.png");
+yelpStarMap.set(4.5, "./img/yelp-stars/small_4_half@2x.png");
+yelpStarMap.set(5, "./img/yelp-stars/small_5@2x.png");
+
 // Notify the user that leaving the page will reset tournament progress
 window.addEventListener('beforeunload', function(e) {
 	if(!winnerShown) {
@@ -139,7 +152,11 @@ function setCardValue(topRestaurant, bottomRestaurant) {
 }
 
 function getInfoText(restaurant) {
-	return `<summary><b>${restaurant.address}</b></summary><br><p><b>Rating:</b> ${restaurant.rating}</p><p><b>Price:</b> ${restaurant.price}</p><p><b>Phone:</b> ${restaurant.phone}</p>`;
+	return `<summary><b>${restaurant.address}</b></summary><br><p><img src=${getYelpStars(restaurant.rating)} /></p><p><b>Price:</b> ${restaurant.price}</p><p><b>Phone:</b> ${restaurant.phone}</p>`;
+}
+
+function getYelpStars(rating) {
+	return yelpStarMap.get(rating);
 }
 
 function showWinner(winner) {
