@@ -168,7 +168,21 @@ input[type=submit] {
   font-size: 20px;
 }
 
+.suggested {
+    box-shadow: 2px 8px #AAA;
+}
+
+.suggested:hover {
+    cursor: pointer;
+    background-color: #DADADA;
+}
+
+.suggested:active {
+    transform: translateY(4px);
+    box-shadow: 2px 4px #888;
+}
+
 #refresh-button {
   display: block;
-  margin: 0 auto; 
+  margin: 0 auto;
 }
