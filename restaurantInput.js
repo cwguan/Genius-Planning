@@ -52,18 +52,7 @@ $(document).ready(function() {
   updateChipContainer();
   generateRandomSuggestedRestaurants();
   displayRandomSuggestedRestaurants();
-
-  // Iterate through the all of the suggested restaurants & add click listenters
-  // so that the user can click the chip to add it to the tournament
-  $(".suggested").each(function(chip){
-    console.log("this", this);
-    this.addEventListener("click", function() {
-      // id is in the format "restaurantName===restaurantAddress"
-      var info = this.id.split('===');
-      restaurantsToDisplay.push(findRestaurantInDB(info[0], info[1]));
-      updateChipContainer();
-    });
-  });
+  addClickListenersToSuggestedRestaurants();
 });
 
 
@@ -340,4 +329,32 @@ function displayRandomSuggestedRestaurants() {
     $("#suggestedRestaurantsUL").append(`<li>${restaurant.name}</li>`)
   });
 
+}
+
+// Iterate through the all of the suggested restaurants & add click listenters
+// so that the user can click the chip to add it to the tournament
+function addClickListenersToSuggestedRestaurants() {
+  $(".suggested").each(function(chip){
+    this.addEventListener("click", function() {
+      // id is in the format "restaurantName===restaurantAddress"
+      var info = this.id.split('===');
+      restaurantsToDisplay.push(findRestaurantInDB(info[0], info[1]));
+      updateChipContainer();
+    });
+  });
+}
+
+
+// Diplays 3 new suggested restaurants
+function refreshSuggestedRestaurants() {
+  // Clear out JS list & remove all current suggested restaurants in the HTML
+  suggestedRestaurants = [];
+  var container = document.getElementById("suggestedRestaurantsChipContainer");
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
+  }
+
+  generateRandomSuggestedRestaurants();
+  displayRandomSuggestedRestaurants();
+  addClickListenersToSuggestedRestaurants();
 }
