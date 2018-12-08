@@ -26,8 +26,18 @@
     background-color: #FBFBFB;
     border: none;
     padding: 6px 10px;
-    font-size: 17px;
+    font-size: 28px;
     cursor: pointer;
+    position: relative;
+    top: 8px;
+}
+
+.dead-search-bar-icon {
+    background-color: #FBFBFB;
+    border: none;
+    padding: 6px 10px;
+    font-size: 28px;
+    cursor: auto;
     position: relative;
     top: 8px;
 }
@@ -73,6 +83,13 @@ button.search-bar-icon:active {
 
 .restaurant-chip .mdl-chip__text {
     font-size: 20px;
+}
+
+#suggestionMessage {
+    font-size: 20px;
+    margin-top: 40px;
+    margin-left: 90px;
+    color: gray;
 }
 
 #finish-button {
@@ -135,4 +152,37 @@ input[type=submit] {
   /*when navigating through the items using the arrow keys:*/
   background-color: DodgerBlue !important;
   color: #ffffff;
+}
+
+#chipContainer {
+  border: 1px solid;
+  width: 95%;
+}
+
+#suggestedRestaurantsChipContainer {
+  height: 120px;
+}
+
+.suggested-restaurant-chip {
+  width: 400px;
+  font-size: 20px;
+}
+
+.suggested {
+    box-shadow: 2px 8px #AAA;
+}
+
+.suggested:hover {
+    cursor: pointer;
+    background-color: #DADADA;
+}
+
+.suggested:active {
+    transform: translateY(4px);
+    box-shadow: 2px 4px #888;
+}
+
+#refresh-button {
+  display: block;
+  margin: 0 auto;
 }

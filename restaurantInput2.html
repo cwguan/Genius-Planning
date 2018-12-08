@@ -19,7 +19,7 @@
                     <!-- Navigation. We hide it in small screens. -->
                     <nav class="mdl-navigation mdl-layout--large-screen-only">
                         <a class="mdl-navigation__link" href="./index.html">Home</a>
-                        <a class="mdl-navigation__link" href="./restaurantInput.html">Input</a>
+                        <a class="mdl-navigation__link" href="./restaurantInput2.html">Input</a>
                     </nav>
                 </div>
             </header>
@@ -31,33 +31,55 @@
                         </div>
                         <div class="mdl-card__supporting-text description-text">
                             Start typing your chosen restaurants & select to enter them into the tournament!
+                            <ol>
+                                <li>Search restaurants that you like in the search bar</li>
+                                <li>Hit enter to add them to the Tournament</li>
+                                <li>Click Finish when you are done choosing</li>
+                            </ol>
+                        </div>
+                        <div class="mdl-card__supporting-text description-text">
+                          Need some help getting started? Here are some restaurants in your area:
+                          <!-- Container to add chips to when user selects restaurants -->
+                          <div id="suggestedRestaurantsChipContainer" class="chip-container">
+                          </div>
+                          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="refresh-button" onclick="refreshSuggestedRestaurants();">
+                              REFRESH SUGGESTIONS
+                          </button>
+                          <br />
+                          Like these suggestions? Start typing the names into the search bar below to enter them into the tournament!
                         </div>
                     </div>
-                
+
                     <div class="search-container mdl-shadow--2dp">
                         <form autocomplete="off">
-                            <button type="submit" class="search-bar-icon"><i class="material-icons">search</i></button>
+                            <i class="material-icons dead-search-bar-icon">search</i>
                             <div class="autocomplete">
                               <input id="restaurantInput" type="text" placeholder="Search for restaurants..." name="search" autocomplete="off">
                             </div>
-                            <button type="submit" class="search-bar-icon"><i class="material-icons">close</i></button>
+                            <i class="material-icons search-bar-icon"  onclick="console.log('Pressed'); document.getElementById('restaurantInput').value = '';">close</i>
                         </form>
                     </div>
                 </div>
 
+                <div style="margin-left:2rem" class="mdl-card__supporting-text description-text">
+                  Restaurants in the Tournament:
+                </div>
+
                 <!-- Container to add chips to when user selects restaurants -->
-                <div id="chipContainer" class="chip-container">
-                    <span class="mdl-chip mdl-chip--contact mdl-chip--deletable restaurant-chip" id="defaultRestaurant1">
-                        <img class="mdl-chip__contact" src="./img/cutlery.jpg"></img>
-                        <span class="mdl-chip__text">Restaurant #1</span>
-                        <a href="#" onclick="deleteDefaultChip(1)" class="mdl-chip__action"><i class="material-icons">close</i></a>
-                    </span>
-                    <span class="mdl-chip mdl-chip--contact mdl-chip--deletable restaurant-chip" id="defaultRestaurant2">
-                        <img class="mdl-chip__contact" src="./img/forkandknife.png"></img>
-                        <span class="mdl-chip__text">Restaurant #2</span>
-                        <a href="#" onclick="deleteDefaultChip(2)" class="mdl-chip__action"><i class="material-icons">close</i></a>
-                    </span>
-                    <span id="suggestionMessage">Add Even More...</span>
+                <div class="centered-container">
+                  <div id="chipContainer" class="chip-container">
+                      <span class="mdl-chip mdl-chip--contact mdl-chip--deletable restaurant-chip" id="defaultRestaurant1">
+                          <img class="mdl-chip__contact" src="./img/cutlery.jpg"></img>
+                          <span class="mdl-chip__text">Restaurant #1</span>
+                          <a href="#" onclick="deleteDefaultChip(1)" class="mdl-chip__action"><i class="material-icons">close</i></a>
+                      </span>
+                      <span class="mdl-chip mdl-chip--contact mdl-chip--deletable restaurant-chip" id="defaultRestaurant2">
+                          <img class="mdl-chip__contact" src="./img/forkandknife.png"></img>
+                          <span class="mdl-chip__text">Restaurant #2</span>
+                          <a href="#" onclick="deleteDefaultChip(2)" class="mdl-chip__action"><i class="material-icons">close</i></a>
+                      </span>
+                      <span id="suggestionMessage">Add Even More...</span>
+                  </div>
                 </div>
             </main>
             <footer>
@@ -82,6 +104,14 @@
               <img class="mdl-chip__contact" src="{{image_url}}"></img>
               <span class="mdl-chip__text">{{#modifyname name}}{{name}}{{/modifyname}}</span>
               <a href="#" onclick="deleteChip(this.parentElement.id)" class="mdl-chip__action"><i class="material-icons">close</i></a>
+          </span>
+        </script>
+
+        <!-- Handlebars template for suggested restaurant chips -->
+        <script id="suggested-chip-template" type="text/x-handlebars-template">
+          <span class="mdl-chip mdl-chip--contact restaurant-chip suggested" id="{{name}}==={{address}}">
+              <img class="mdl-chip__contact" src="{{image_url}}"></img>
+              <span class="mdl-chip__text">{{#modifyname2 name}}{{name}}{{/modifyname2}}</span>
           </span>
         </script>
     </body>

@@ -3,6 +3,9 @@
 // needs to be created and displayed for
 var selectedRestaurants = [];
 var restaurantsToDisplay = [];
+var defaultRestaurant1Deleted = false;
+var defaultRestaurant2Deleted = false;
+var suggestedRestaurants = [];
 
 // Check to see if user is leaving page in any OTHER way than clicking the
 // FINISH button as all inputted restuarants will disappear
@@ -27,7 +30,29 @@ $(document).ready(function() {
           return opts.fn(this);
       }
   });
+
+  // Register a helper function to shorten restaurant names to prevent
+  // overflow in chips for suggested restaurants
+  Handlebars.registerHelper('modifyname2', function(a, opts) {
+      if(a.length > 17) {
+          var modifiedName = a.slice(0, 17);
+          modifiedName += "...";
+          return modifiedName;
+      }
+      else {
+          return opts.fn(this);
+      }
+  });
+
+  if(selectedRestaurants.length < 2) {
+      $("#defaultRestaurant1").fadeIn();
+      $("#defaultRestaurant2").fadeIn();
+      $("#suggestionMessage").fadeIn();
+  }
   updateChipContainer();
+  generateRandomSuggestedRestaurants();
+  displayRandomSuggestedRestaurants();
+  addClickListenersToSuggestedRestaurants();
 });
 
 
@@ -45,11 +70,34 @@ function updateChipContainer() {
         selectedRestaurants.push(restaurantsToDisplay[i]);
         var curRestaurant = restaurantsToDisplay[i];
         var curHtml = template(curRestaurant);
-        parentDiv.append(curHtml);
+
+        //Adding the first and second restaurant replace the "default restaurant" chips.
+        //Default chips DO NOT reappear after they are replaced or deleted
+        if(!defaultRestaurant1Deleted && selectedRestaurants.length == 1) {
+            defaultRestaurant1Deleted = true;
+            defaultRestaurant1 = document.getElementById("defaultRestaurant1");
+            defaultRestaurant1.style.display = "none"
+            defaultRestaurant1.insertAdjacentHTML("beforebegin", curHtml)
+        }
+        else if(!defaultRestaurant2Deleted && selectedRestaurants.length == 2) {
+            defaultRestaurant2Deleted = true;
+            defaultRestaurant2 = document.getElementById("defaultRestaurant2");
+            defaultRestaurant2.style.display = "none"
+            defaultRestaurant2.insertAdjacentHTML("beforebegin", curHtml)
+        }
+        else {
+            document.getElementById("suggestionMessage").style.display = "none"
+            parentDiv.append(curHtml);
+        }
     }
   }
   console.log("Updated selectedRestaurants in updateChipContainer: ", selectedRestaurants);
   restaurantsToDisplay = [];
+
+  //Display finish button if more than two restaurants have been selected
+  if(selectedRestaurants.length >= 2) {
+      document.getElementById("finish-button").style.display = "inline-block";
+  }
 }
 
 
@@ -59,6 +107,7 @@ function findRestaurantInDB(restaurantName, addressValue) {
   for (var i = 0; i < restaurantData.length; i++) {
     if (restaurantData[i].name === restaurantName && restaurantData[i].address === addressValue) {
       console.log(`Found restaurant: ${restaurantName} === ${addressValue}`);
+      checkNAFields(restaurantData[i]);
       return restaurantData[i];
     }
   }
@@ -71,6 +120,13 @@ function findRestaurantInDB(restaurantName, addressValue) {
       'rating': 0.0,
       'image_url': './img/image-not-found.png'
   }
+}
+
+function checkNAFields(restaurant) {
+    if(!restaurant.phone) restaurant.phone = "NA";
+    if(!restaurant.price) restaurant.price = "NA";
+    if(!restaurant.rating) restaurant.rating = "NA";
+    if(!restaurant.image_url) restaurant.image_url = './img/image-not-found.png';
 }
 
 
@@ -92,6 +148,22 @@ function deleteChip(chipId) {
           return false;
       }
   });
+
+  //Hide finish button if less than two restaurants are selected now
+  if(selectedRestaurants.length < 2) {
+      document.getElementById("finish-button").style.display = "none";
+  }
+}
+
+function deleteDefaultChip(number) {
+    if(number == 1) {
+        defaultRestaurant1Deleted = true;
+        document.getElementById("defaultRestaurant1").style.display = "none";
+    }
+    else if(number == 2) {
+        defaultRestaurant2Deleted = true;
+        document.getElementById("defaultRestaurant2").style.display = "none";
+    }
 }
 
 
@@ -105,7 +177,7 @@ function finish() {
     sessionStorage.setItem('selectedRestaurants', JSON.stringify(selectedRestaurants));
     // Flag for valid navagation away from the restaurantInput page
     leavePageFromFinishButton = true;
-    document.location.href = './tournament.html';
+    document.location.href = './shareLink.html';
   }
 }
 
@@ -224,3 +296,65 @@ function autocomplete(inp, db) {
 
 // Adds autocomplete & resturant selection to our search box
 autocomplete(document.getElementById("restaurantInput"), restaurantData);
+
+document.getElementById("suggestionMessage").addEventListener("click", () => {
+    $("#restaurantInput").focus();
+});
+
+function generateRandomSuggestedRestaurants() {
+  var numSuggestedRestaurants = 3;
+  for (var i = 0; i < numSuggestedRestaurants; i++) {
+    var randomIndex = Math.floor(Math.random() * restaurantData.length);
+    suggestedRestaurants.push(findRestaurantInDB(restaurantData[randomIndex].name, restaurantData[randomIndex].address));
+  }
+  console.log(suggestedRestaurants);
+}
+
+
+function displayRandomSuggestedRestaurants() {
+  // compile the template
+  var source   = $("#suggested-chip-template").html();
+  var template = Handlebars.compile(source);
+
+  var parentDiv = $("#suggestedRestaurantsChipContainer");
+
+  for (var i = 0; i < suggestedRestaurants.length; i++) {
+      var curRestaurant = suggestedRestaurants[i];
+      var curHtml = template(curRestaurant);
+      parentDiv.append(curHtml);
+  }
+
+
+  suggestedRestaurants.forEach(function(restaurant) {
+    $("#suggestedRestaurantsUL").append(`<li>${restaurant.name}</li>`)
+  });
+
+}
+
+// Iterate through the all of the suggested restaurants & add click listenters
+// so that the user can click the chip to add it to the tournament
+function addClickListenersToSuggestedRestaurants() {
+  $(".suggested").each(function(chip){
+    this.addEventListener("click", function() {
+      // id is in the format "restaurantName===restaurantAddress"
+      var info = this.id.split('===');
+      restaurantsToDisplay.push(findRestaurantInDB(info[0], info[1]));
+      updateChipContainer();
+    });
+  });
+}
+
+
+// Diplays 3 new suggested restaurants
+function refreshSuggestedRestaurants() {
+  // Clear out JS list & remove all current suggested restaurants in the HTML
+  suggestedRestaurants = [];
+  var container = document.getElementById("suggestedRestaurantsChipContainer");
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
+  }
+
+  generateRandomSuggestedRestaurants();
+  displayRandomSuggestedRestaurants();
+  addClickListenersToSuggestedRestaurants();
+}
